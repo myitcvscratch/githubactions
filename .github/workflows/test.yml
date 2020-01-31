@@ -5,36 +5,18 @@ on:
   pull_request:
     branches:
       - '**'
-  schedule:
-    - cron: '40 16 * * *'
-
-env:
-  GO111MODULE: on
-  GOPROXY: https://proxy.golang.org
-  ARTEFACTS: $HOME/artefacts
-  CI: true
 
 name: Test
 jobs:
   test:
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest]
-        go_version: ["go1.13.5","go1.13.6"]
-        vim_flavor: ["vim","gvim"]
-        vim_version: ["v8.1.2056","v8.2.0151"]
+        os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
-    env:
-      GO_VERSION: ${{ matrix.go_version }}
-      VIM_FLAVOR: ${{ matrix.vim_flavor }}
-      VIM_VERSION: ${{ matrix.vim_version }}
-      BLAH: ${{ secrets.BLAH }}
     steps:
-    - name: Install Go
-      uses: actions/setup-go@v1
+    - uses: actions/setup-go@9fbc767707c286e568c92927bbf57d76b73e0892
       with:
-        go-version: ${{ matrix.go-version }}
-    - name: Checkout code
-      uses: actions/checkout@v1
-    - name: Dump env
-      run: env
+        go-version: '1.14.x'
+    - name: Install Vim
+      uses: myitcvscratch/myfirstaction@7a7c90cd7adb9c4252bda1a2c9cbed36352703ed
