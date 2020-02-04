@@ -19,4 +19,4 @@ jobs:
       with:
         go-version: '1.14.x'
     - name: Install Vim
-      uses: myitcvscratch/myfirstaction@3ff919785e67567930abd9b646b40249b61b7635
+      uses: myitcvscratch/myfirstaction@4e4a3f1490b7fbd212669a6a2780f731bd1304bc
