@@ -15,8 +15,8 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/setup-go@9fbc767707c286e568c92927bbf57d76b73e0892
-      with:
-        go-version: '1.14.x'
-    - name: Install Vim
-      uses: myitcvscratch/myfirstaction@4e4a3f1490b7fbd212669a6a2780f731bd1304bc
+    - run: echo "::set-env name=CI_SKIP_JOB::false"
+    - run: false
+    - run: echo "Hello world"
+      if: (success() || failure()) && env.CI_SKIP_JOB != 'true'
+    - run: echo "Hello world again"
